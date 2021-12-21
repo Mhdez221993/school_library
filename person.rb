@@ -1,5 +1,6 @@
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'corrector'
 
 class Person
   attr_accessor :name, :age
@@ -10,10 +11,15 @@ class Person
     @name = name
     @age = age
     @parent_permission = parent_permission
+    @corrector = Corrector.new
   end
 
   def can_use_services?
     is_of_age or @parent_permission
+  end
+
+  def validate_name
+    @corrector.correct_name(@name)
   end
 
   private
