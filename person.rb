@@ -1,5 +1,3 @@
-require_relative 'student'
-require_relative 'teacher'
 require_relative 'corrector'
 
 class Person
@@ -15,7 +13,7 @@ class Person
   end
 
   def can_use_services?
-    is_of_age or @parent_permission
+    of_age or @parent_permission
   end
 
   def validate_name
