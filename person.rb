@@ -1,3 +1,4 @@
+require 'pry'
 require_relative 'corrector'
 
 class Person
@@ -13,7 +14,7 @@ class Person
   end
 
   def can_use_services?
-    of_age or @parent_permission
+    use_of_age or @parent_permission
   end
 
   def validate_name
@@ -26,3 +27,7 @@ class Person
     @age >= 18
   end
 end
+
+person = Person.new(25, 'Doe')
+
+binding.pry
