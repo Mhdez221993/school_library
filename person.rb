@@ -1,15 +1,20 @@
 require_relative 'corrector'
+require_relative 'book'
+require_relative 'rental'
+require_relative 'student'
+require_relative 'teacher'
 
 class Person
   attr_accessor :name, :age
-  attr_reader :id
+  attr_reader :id, :rentals
 
   def initialize(age, name = 'Unknown', parent_permission: true)
     @id = Random.rand(1..10.000)
-    @name = name
     @age = age
+    @name = name
     @parent_permission = parent_permission
     @corrector = Corrector.new
+    @rentals = []
   end
 
   def can_use_services?
