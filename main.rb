@@ -99,29 +99,35 @@ def list_rental(peoples)
   puts "\n"
 end
 
+# rubocop:disable Metrics/CyclomaticComplexity
+def run(peoples, books, rentals)
+  case gets.chomp
+  when '1'
+    list_books(books)
+  when '2'
+    list_all_peoples(peoples)
+  when '3'
+    peoples.push(create_person)
+  when '4'
+    books.push(create_book)
+  when '5'
+    rentals.push(create_rental(books, peoples.last))
+    puts "\n"
+  when '6'
+    list_rental(peoples)
+  when '7'
+    !exit
+  end
+end
+# rubocop:enable Metrics/CyclomaticComplexity
+
 def main
   peoples = []
   books = []
   rentals = []
   loop do
     display_welcome
-    case gets.chomp
-    when '1'
-      list_books(books)
-    when '2'
-      list_all_peoples(peoples)
-    when '3'
-      peoples.push(create_person)
-    when '4'
-      books.push(create_book)
-    when '5'
-      rentals.push(create_rental(books, peoples.last))
-      puts "\n"
-    when '6'
-      list_rental(peoples)
-    when '7'
-      !exit
-    end
+    run(peoples, books, rentals)
   end
 end
 
