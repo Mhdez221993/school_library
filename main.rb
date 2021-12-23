@@ -4,6 +4,7 @@ require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'classroom'
+require_relative 'rental'
 
 def display_welcome
   puts 'Welcome to School Library App!'
@@ -19,28 +20,30 @@ def display_welcome
 end
 
 def create_student
-  puts 'Age:'
+  print 'Age: '
   age = gets.chomp
-  puts 'Name:'
+  print 'Name: '
   name = gets.chomp
-  puts 'Has parent permission? [Y/N]:'
+  print 'Has parent permission? [Y/N]: '
   parent_permission = gets.chomp.downcase == 'y'
-  Student.new(age, name, parent_permission)
+  classroom = Classroom.new('Microverse')
+  Student.new(classroom, age, name, parent_permission)
 end
 
 def create_teacher
-  puts 'Age:'
+  print 'Age: '
   age = gets.chomp
-  puts 'Name:'
+  print 'Name: '
   name = gets.chomp
-  puts 'Specialization '
+  print 'Specialization: '
   specialization = gets.chomp
   Teacher.new(specialization, age, name)
 end
 
 def create_person
-  puts 'Do you want to create (1) a student or teacher (2) : '
+  print 'Do you want to create (1) a student or teacher (2)? [Input the number]: '
   person = gets.chomp
+
   case person
   when '1'
     create_student
@@ -50,23 +53,50 @@ def create_person
 end
 
 def create_book
-  puts 'Title:'
+  print 'Title: '
   title = gets.chomp
-  puts 'Author'
+  print 'Author: '
   author = gets.chomp
-  puts 'The book was successfully created!'
+  print 'The book was successfully created! '
   Book.new(title, author)
 end
 
-def create_rental(books, peoples)
-  date = Time.new.strftime('%Y-%m-%d %H:%M:%S')
-  person = get_person(peoples)
-  book = get_book(books)
+def create_rental(books, person)
+  puts 'Select a book from the following list by number'
+  books.each_with_index do |book, i|
+    puts "#{i}) Title: #{book.title}, Author: #{book.author}"
+  end
+  book = books[gets.chomp.to_i]
+  print 'Date: '
+  date = gets.chomp
   Rental.new(date, person, book)
 end
 
-def list_rental(rentals)
-  rentals.each { |rental| puts rental.date, rental.book, rental.person }
+def list_books(books)
+  books.each do |book|
+    puts "Title: #{book.title}, Author: #{book.author}"
+  end
+  puts "\n"
+end
+
+def list_all_peoples(peoples)
+  peoples.each do |people|
+    puts "[#{people.class.name}] Name: #{people.name}, ID: #{people.id}, Age: #{people.age}"
+  end
+  puts "\n"
+end
+
+def list_rental(peoples)
+  print 'Id of person: '
+  id = gets.chomp
+  peoples.each do |people|
+    next unless people.id == id.to_i
+
+    people.rentals.each do |rental|
+      puts "Date: #{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}"
+    end
+  end
+  puts "\n"
 end
 
 def main
@@ -77,17 +107,18 @@ def main
     display_welcome
     case gets.chomp
     when '1'
-      books.each { |book| puts book.title }
+      list_books(books)
     when '2'
-      peoples.each { |people| puts people.name }
+      list_all_peoples(peoples)
     when '3'
       peoples.push(create_person)
     when '4'
       books.push(create_book)
     when '5'
-      rentals.push(create_rental(books, peoples))
+      rentals.push(create_rental(books, peoples.last))
+      puts "\n"
     when '6'
-      list_rental(rentals)
+      list_rental(peoples)
     when '7'
       !exit
     end
