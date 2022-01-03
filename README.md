@@ -26,6 +26,11 @@ $ ruby main.rb
 * Twitter: [@MoisesH42060050](https://twitter.com/MoisesH42060050)
 * LinkedIn: [Moises Hernandez Coronado](https://www.linkedin.com/in/moises-hdez-coronado/)
 
+👤 **Tufoin Nkuo**
+- GitHub: [@tufoinnkuo10](https://github.com/tufoinnkuo10)
+- Twitter: [@itztenten](https://twitter.com/itztenten)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/tufoin-nkuo-3b272320b)
+
 ## Show your support
 
 Give a ⭐️ if you like this project!
