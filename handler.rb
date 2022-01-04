@@ -44,8 +44,9 @@ module Handlers
     title = gets.chomp
     print 'Author: '
     author = gets.chomp
+    book = Book.new(title, author)
+    @books.push(book)
     print 'The book was successfully created! '
-    Book.new(title, author)
   end
 
   def create_rental(books, person)
