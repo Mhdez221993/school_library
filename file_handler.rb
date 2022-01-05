@@ -40,4 +40,19 @@ module HandlersFile
   def fin_person(person)
     @peoples.each { |people| return people if people.id == person }
   end
+
+  def load_rentals
+    file = 'rentals.json'
+    if File.exist? file
+      JSON.parse(File.read(file)).map do |rental|
+        date = rental['date']
+        person = fin_person(rental['person'])
+        book = find_book(rental['book'])
+        Rental.new(date, person, book)
+      end
+    else
+      []
+    end
+  end
+
 end
