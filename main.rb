@@ -1,13 +1,15 @@
 # !/usr/bin/env ruby
 require_relative 'handler'
+require_relative 'file_handler'
 
 class Program
   include Handlers
+  include HandlersFile
 
   def initialize
-    @peoples = []
-    @books = []
-    @rentals = []
+    @peoples = load_peoples
+    @books = load_books
+    @rentals = load_rentals
   end
 
   def display_welcome
@@ -33,13 +35,14 @@ class Program
     when '3'
       @peoples.push(create_person)
     when '4'
-      @books.push(create_book)
+      create_book
     when '5'
       @rentals.push(create_rental(@books, @peoples.last))
       puts "\n"
     when '6'
       list_rental(@peoples)
     when '7'
+      persist_data
       !exit
     end
   end
