@@ -70,7 +70,7 @@ module HandlersFile
                     permission: people.parent_permission })
       end
     end
-    File.open('peoples.json', 'w') { |f| f.write JSON.generate(json) }
+    File.open('peoples.json', 'w') { |file| file.write JSON.generate(json) }
   end
 
   def books_to_json
@@ -78,7 +78,7 @@ module HandlersFile
     @books.each do |book|
       json.push({ title: book.title, author: book.author })
     end
-    File.open('books.json', 'w') { |f| f.write JSON.generate(json) }
+    File.open('books.json', 'w') { |file| file.write JSON.generate(json) }
   end
 
   def rentals_to_json
@@ -86,7 +86,7 @@ module HandlersFile
     @rentals.each do |rental|
       json.push({ date: rental.date, person: rental.person.id, book: rental.book.title })
     end
-    File.open('rentals.json', 'w') { |f| f.write JSON.generate(json) }
+    File.open('rentals.json', 'w') { |file| file.write JSON.generate(json) }
   end
 
   def persist_data
