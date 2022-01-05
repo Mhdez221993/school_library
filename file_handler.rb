@@ -1,0 +1,9 @@
+require 'json'
+require_relative 'book'
+require_relative 'student'
+require_relative 'teacher'
+require_relative 'classroom'
+require_relative 'rental'
+
+module HandlersFile
+end
