@@ -14,7 +14,12 @@ module HandlersFile
           teacher = Teacher.new(people['specialization'], people['age'], people['name'])
           teacher.id = people['id']
           teacher
-        
+        else
+          parent_permission = people['permission'] && true
+          student = Student.new('Microverse', people['age'], people['name'], parent_permission)
+          student.id = people['id']
+          student
+        end
       end
     else
       []
