@@ -59,4 +59,19 @@ module HandlersFile
     end
   end
 
+  def poeples_to_json
+    json = []
+    @peoples.each do |people|
+      if people.instance_of?(Teacher)
+        json.push({ instance: 'teacher', id: people.id, age: people.age, name: people.name,
+                    specialization: people.specialization })
+      else
+        json.push({ instance: 'student', id: people.id, age: people.age, name: people.name,
+                    permission: people.parent_permission })
+      end
+    end
+    File.open('peoples.json', 'w') { |f| f.write JSON.generate(json) }
+  end
+
+
 end
