@@ -7,9 +7,10 @@ class Program
   include HandlersFile
 
   def initialize
-    @peoples = []
-    @books = []
+    @peoples = load_peoples
+    @books = load_books
     @rentals = load_rentals
+    puts @rentals
   end
 
   def display_welcome
