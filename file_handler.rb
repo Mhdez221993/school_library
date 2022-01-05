@@ -89,4 +89,9 @@ module HandlersFile
     File.open('rentals.json', 'w') { |f| f.write JSON.generate(json) }
   end
 
+  def persist_data
+    poeples_to_json unless @peoples.empty?
+    books_to_json unless @books.empty?
+    rentals_to_json unless @rentals.empty?
+  end
 end
