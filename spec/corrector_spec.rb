@@ -1,8 +1,17 @@
 require_relative '../corrector'
 
 describe Corrector do
-  corrector = Corrector.new
+  before(:each) do
+    @corrector = Corrector.new
+  end
   it('Shoud chec if Corrector is instance of Corrector') do
-    expect(corrector).to be_instance_of(Corrector)
+    expect(@corrector).to be_instance_of Corrector
+  end
+
+  describe '#correct_name' do
+    it('Should capitalize the string') do
+      str = 'mhdez'
+      expect(@corrector.correct_name(str)).to eq 'Mhdez'
+    end
   end
 end
