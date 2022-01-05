@@ -37,8 +37,12 @@ module HandlersFile
     end
   end
 
-  def fin_person(person)
+  def find_person(person)
     @peoples.each { |people| return people if people.id == person }
+  end
+
+  def find_book(title)
+    @books.each { |book| return book if book.title == title }
   end
 
   def load_rentals
