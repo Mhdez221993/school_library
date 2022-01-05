@@ -48,7 +48,7 @@ module HandlersFile
   def load_rentals
     file = 'rentals.json'
     if File.exist? file
-      JSON.parse(File.read(file)).map do |rental|
+      JSON.parse(File.read(file), create_additions: true).map do |rental|
         date = rental['date']
         person = find_person(rental['person'])
         book = find_book(rental['book'])
