@@ -73,5 +73,11 @@ module HandlersFile
     File.open('peoples.json', 'w') { |f| f.write JSON.generate(json) }
   end
 
-
+  def books_to_json
+    json = []
+    @books.each do |book|
+      json.push({ title: book.title, author: book.author })
+    end
+    File.open('books.json', 'w') { |f| f.write JSON.generate(json) }
+  end
 end
