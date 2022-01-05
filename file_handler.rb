@@ -26,4 +26,14 @@ module HandlersFile
     end
   end
 
+  def load_books
+    file = 'books.json'
+    if File.exist? file
+      JSON.parse(File.read(file)).map do |book|
+        Book.new(book['title'], book['author'])
+      end
+    else
+      []
+    end
+  end
 end
