@@ -36,8 +36,8 @@ module HandlersFile
       []
     end
   end
+
   def fin_person(person)
     @peoples.each { |people| return people if people.id == person }
   end
-
 end
