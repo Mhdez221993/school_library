@@ -50,7 +50,7 @@ module HandlersFile
     if File.exist? file
       JSON.parse(File.read(file)).map do |rental|
         date = rental['date']
-        person = fin_person(rental['person'])
+        person = find_person(rental['person'])
         book = find_book(rental['book'])
         Rental.new(date, person, book)
       end
