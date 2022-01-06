@@ -47,4 +47,9 @@ describe Person do
   it 'Shoud chec if age if type of number' do
     expect { person.something }.to raise_error(NoMethodError)
   end
+
+  it 'Generate a random number' do
+    allow(person).to receive(:id).and_return(402)
+    expect(person.id).to eq(402)
+  end
 end
