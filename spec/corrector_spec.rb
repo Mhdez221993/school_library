@@ -18,6 +18,5 @@ describe Corrector do
       str = 'tufoin '
       expect(@corrector.correct_name(str)).to eq 'Tufoin'
     end
-    
   end
 end
