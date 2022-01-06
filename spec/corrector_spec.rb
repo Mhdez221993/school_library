@@ -13,5 +13,11 @@ describe Corrector do
       str = 'mhdez'
       expect(@corrector.correct_name(str)).to eq 'Mhdez'
     end
+
+    it('Should capitalize the string') do
+      str = 'tufoin '
+      expect(@corrector.correct_name(str)).to eq 'Tufoin'
+    end
+    
   end
 end
