@@ -3,8 +3,8 @@ class Solver
     120
   end
 
-  def reverse(_str)
-    'doog'
+  def reverse(str)
+    str.reverse
   end
 
   def fizzbuzz(_n)
