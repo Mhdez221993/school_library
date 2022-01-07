@@ -1,11 +1,17 @@
+require_relative '../solver'
+
 describe Solver do
   before(:each) do
     @solver = Solver.new
   end
 
   describe '#factorial' do
-    it('should check the sum of factorial') do
+    it('should check of factorial of a number') do
       expect(@solver.factorial(3)).to eq 6
+    end
+
+    it('should check of factorial of a number') do
+      expect(@solver.factorial(5)).to eq 120
     end
   end
 
@@ -20,6 +26,16 @@ describe Solver do
 
     it 'Should verify if the number is multiple of 5' do
       expect(@solver.fizzbuzz(10)).to eq 'buzz'
+    end
+  end
+
+  describe '#reverse' do
+    it 'Should reverse a word the oposite way' do
+      expect(@solver.reverse('hello')).to eq 'olleh'
+    end
+
+    it 'Should reverse a word the oposite way' do
+      expect(@solver.reverse('good')).to eq 'doog'
     end
   end
 end
