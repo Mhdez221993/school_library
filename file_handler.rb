@@ -10,13 +10,12 @@ module HandlersFile
     file = 'peoples.json'
     if File.exist? file
       JSON.parse(File.read(file)).map do |people|
-        if people['instance'] == 'teacher'
+        if people['json_class'] == 'Teacher'
           teacher = Teacher.new(people['specialization'], people['age'], people['name'])
           teacher.id = people['id']
           teacher
         else
-          parent_permission = people['permission'] && true
-          student = Student.new('Microverse', people['age'], people['name'], parent_permission)
+          student = Student.new('Microverse', people['age'], people['name'], people['parent_permission'])
           student.id = people['id']
           student
         end
@@ -29,9 +28,7 @@ module HandlersFile
   def load_books
     file = 'books.json'
     if File.exist? file
-      JSON.parse(File.read(file)).map do |book|
-        Book.new(book['title'], book['author'])
-      end
+      JSON.parse(File.read(file), create_additions: true)
     else
       []
     end
@@ -59,28 +56,6 @@ module HandlersFile
     end
   end
 
-  def poeples_to_json
-    json = []
-    @peoples.each do |people|
-      if people.instance_of?(Teacher)
-        json.push({ instance: 'teacher', id: people.id, age: people.age, name: people.name,
-                    specialization: people.specialization })
-      else
-        json.push({ instance: 'student', id: people.id, age: people.age, name: people.name,
-                    permission: people.parent_permission })
-      end
-    end
-    open('peoples.json', 'w') { |f| f.write JSON.generate(json) }
-  end
-
-  def books_to_json
-    json = []
-    @books.each do |book|
-      json.push({ title: book.title, author: book.author })
-    end
-    open('books.json', 'w') { |f| f << JSON.generate(json) }
-  end
-
   def rentals_to_json
     json = []
     @rentals.each do |rental|
@@ -90,8 +65,8 @@ module HandlersFile
   end
 
   def persist_data
-    poeples_to_json unless @peoples.empty?
-    books_to_json unless @books.empty?
-    rentals_to_json unless @rentals.empty?
+    open('peoples.json', 'w') { |f| f.write JSON.generate(@peoples) } unless @peoples.empty?
+    open('books.json', 'w') { |f| f.write JSON.generate(@books) } unless @books.empty?
+    open('rentals.json', 'w') { |f| f.write JSON.generate(@rentals) } unless @rentals.empty?
   end
 end
