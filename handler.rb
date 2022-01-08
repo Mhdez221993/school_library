@@ -20,7 +20,7 @@ module Handlers
     print 'Id of person: '
     id = gets.chomp
     puts 'Rentals:'
-    @rentals.each { |rental| puts rental if rental.person.id = id.to_i }
+    @rentals.each { |rental| puts rental if rental.person.id == id.to_i }
     puts "\n"
   end
 
