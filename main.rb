@@ -29,18 +29,18 @@ class Program
   def run
     case gets.chomp
     when '1'
-      list_books(@books)
+      list_books
     when '2'
-      list_all_peoples(@peoples)
+      list_all_peoples
     when '3'
       @peoples.push(create_person)
     when '4'
       create_book
     when '5'
-      @rentals.push(create_rental(@books, @peoples.last))
+      @rentals.push(create_rental)
       puts "\n"
     when '6'
-      list_rental(@peoples)
+      list_rental
     when '7'
       persist_data
       !exit

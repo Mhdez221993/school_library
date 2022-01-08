@@ -6,6 +6,24 @@ require_relative 'classroom'
 require_relative 'rental'
 
 module Handlers
+  def list_books
+    @books.each { |book| puts book }
+    puts "\n"
+  end
+
+  def list_all_peoples
+    @peoples.each { |people| puts people }
+    puts "\n"
+  end
+
+  def list_rental
+    print 'Id of person: '
+    id = gets.chomp
+    puts 'Rentals:'
+    @rentals.each { |rental| puts rental if rental.person.id = id.to_i }
+    puts "\n"
+  end
+
   def create_student
     print 'Age: '
     age = gets.chomp
@@ -49,41 +67,22 @@ module Handlers
     print 'The book was successfully created! '
   end
 
-  def create_rental(books, person)
+  def create_rental
     puts 'Select a book from the following list by number'
-    books.each_with_index do |book, i|
-      puts "#{i}) Title: #{book.title}, Author: #{book.author}"
+    @books.each_with_index do |book, i|
+      puts "#{i}) #{book}"
     end
-    book = books[gets.chomp.to_i]
+    book = @books[gets.chomp.to_i]
+
+    puts 'Select a person from the following list by number (not id)'
+    @peoples.each_with_index do |person, i|
+      puts "#{i}) #{person}"
+    end
+    person = @peoples[gets.chomp.to_i]
+
     print 'Date: '
     date = gets.chomp
+
     Rental.new(date, person, book)
-  end
-
-  def list_books(books)
-    books.each do |book|
-      puts "Title: #{book.title}, Author: #{book.author}"
-    end
-    puts "\n"
-  end
-
-  def list_all_peoples(peoples)
-    peoples.each do |people|
-      puts "[#{people.class.name}] Name: #{people.name}, ID: #{people.id}, Age: #{people.age}"
-    end
-    puts "\n"
-  end
-
-  def list_rental(peoples)
-    print 'Id of person: '
-    id = gets.chomp
-    peoples.each do |people|
-      next unless people.id == id.to_i
-
-      people.rentals.each do |rental|
-        puts "Date: #{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}"
-      end
-    end
-    puts "\n"
   end
 end
